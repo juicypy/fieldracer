@@ -13,7 +13,7 @@ var escaper = strings.NewReplacer(
 	`"`, "&#34;", // "&#34;" is shorter than "&quot;".
 )
 
-// ScriptEscaper verify each string structure field and
+// ScriptEscaper receives structure pointer, verify each string field and
 // escapes special characters like "<" to become "&lt;".
 // It escapes only five such characters: <, >, &, ' and ".
 func ScriptEscaper(structptr interface{}) {
@@ -37,5 +37,15 @@ func escape(structptr interface{}, replacer *strings.Replacer){
 		}
 	}
 }
+
+func EqualFieldsSetter(fromstruct interface{}, tostruct interface{}){
+
+}
+
+func NotEqualFieldsSetter(fromstruct interface{}, tostruct interface{}){
+
+}
+
+
 
 
