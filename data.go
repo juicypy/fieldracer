@@ -75,7 +75,7 @@ func mapEscape(mapPtr *map[string]interface{}, replacer *strings.Replacer){
 }
 
 func isStructType(typeName string)bool{
-	var stdTypes = []string{"map", "int", "float", "map", "string", "*"}
+	var stdTypes = []string{"map", "int", "float", "map", "string", "bool", "*"}
 
 	for _, stdTypeIterator := range stdTypes {
 		if strings.Contains(typeName, stdTypeIterator){
