@@ -33,7 +33,7 @@ func MapScriptEscaper(mapPtr *map[string]interface{}){
 	mapEscape(mapPtr, escaper)
 }
 
-}
+
 
 // StringScriptEscaper verify single string and
 // escapes special characters like "<" to become "&lt;".
