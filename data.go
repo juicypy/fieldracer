@@ -13,22 +13,33 @@ var escaper = strings.NewReplacer(
 	`"`, "&#34;", // "&#34;" is shorter than "&quot;".
 )
 
-// ScriptEscaper verify each string structure field and
+// StructScriptEscaper verify each string structure field and
 // escapes special characters like "<" to become "&lt;".
 // It escapes only five such characters: <, >, &, ' and ".
 func StructScriptEscaper(structptr interface{}) {
 	structEscape(structptr, escaper)
 }
 
-// CharEscaper works the same as ScriptEscaper, but escapes only character you need
+// StructCharEscaper works the same as ScriptEscaper, but escapes only character you need
 func StructCharEscaper(structptr interface{}, oldstr string, newstr string){
 	newEscaper := strings.NewReplacer(oldstr, newstr)
 	structEscape(structptr, newEscaper)
+}
+
+// MapScriptEscaper verify each string value of map and
+// escapes special characters like "<" to become "&lt;".
+// It escapes only five such characters: <, >, &, ' and ".
+func MapScriptEscaper(mapPtr *map[string]interface{}){
+	mapEscape(mapPtr, escaper)
+}
 
 }
 
-func MapScriptEscaper(mapPtr *map[string]interface{}){
-	mapEscape(mapPtr, escaper)
+// StringScriptEscaper verify single string and
+// escapes special characters like "<" to become "&lt;".
+// It escapes only five such characters: <, >, &, ' and ".
+func StringScriptEscaper(stringWithSyms *string){
+	*stringWithSyms = escaper.Replace(*stringWithSyms)
 }
 
 func structEscape(structptr interface{}, replacer *strings.Replacer){
