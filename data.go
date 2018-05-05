@@ -44,9 +44,22 @@ func StringScriptEscaper(stringWithSyms *string){
 
 func structEscape(structptr interface{}, replacer *strings.Replacer){
 	t := reflect.ValueOf(structptr).Elem()
+	recursiveStructEscape(t, replacer)
+}
+
+func recursiveStructEscape(t reflect.Value, replacer *strings.Replacer){
 	fieldsLen := t.NumField()
 
 	for i := 0; i < fieldsLen; i++ {
+
+		if isStructType(t.Field(i).Type().String()){
+			recursiveStructEscape(t.Field(i), replacer)
+		}
+
+		if isPointerType(t.Field(i).Type().String()){
+			recursiveStructEscape(t.Field(i).Elem(), replacer)
+		}
+
 		if t.Field(i).Type().String() == "string" {
 			t.Field(i).SetString(replacer.Replace(t.Field(i).String()))
 		}
@@ -60,5 +73,24 @@ func mapEscape(mapPtr *map[string]interface{}, replacer *strings.Replacer){
 		}
 	}
 }
+
+func isStructType(typeName string)bool{
+	var stdTypes = []string{"map", "int", "float", "map", "string", "*"}
+
+	for _, stdTypeIterator := range stdTypes {
+		if strings.Contains(typeName, stdTypeIterator){
+			return false
+		}
+	}
+	return true
+}
+
+func isPointerType(typeName string)bool{
+	if strings.Contains(typeName, "*"){
+		return true
+	}
+	return false
+}
+
 
 
