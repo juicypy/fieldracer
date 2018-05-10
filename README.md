@@ -67,7 +67,10 @@ func main(){
 }
 ```
 
-## it's also works with map[string]interface{} in the same way
+## it's also works with map[string]interface{} in the same way using
+```go
+   fieldracer.MapScriptEscaper()
+```
 ## you can escape only character you need using: 
 ```go
   fieldracer.StructCharEscaper(&withScript, "*", "(")
