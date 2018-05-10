@@ -1,6 +1,6 @@
 # fieldracer
 
-juicypy/fieldracer is a golang library for easy parsing structure fields
+juicypy/fieldracer is a golang library for easy parsing structure fields.
 It helps to escape special script characters demanding not a lot of code from developer 
 using only "reflect" and "strings" go std libraries
 
