@@ -11,7 +11,7 @@ From your GOPATH:
 ```bash
 go get github.com/juicypy/fieldracer
 ```
-## example
+# Example
 
 ```go
 package main
@@ -37,7 +37,7 @@ func main(){
 	//-> Escaped structure: &{FieldOne:&lt;danger script&gt; FieldTwo:not a script NotStringField:42}
 }
 ```
-# it even works with nested structures or it's pointers
+## it even works with nested structures or it's pointers
 
 ```go
 type structWithScpriptedFields struct {
@@ -67,13 +67,13 @@ func main(){
 }
 ```
 
-# it's also works with map[string]interface{} in the same way
-# you can escape only character you need using: 
+## it's also works with map[string]interface{} in the same way
+## you can escape only character you need using: 
 ```go
   fieldracer.StructCharEscaper(&withScript, "*", "(")
   //and fields with "*" character will have "(" in their place
 ```
-# and you can escape single string
+## and you can escape single string
 ```go
   someScriptedString := "<one more danger script>"
   fieldracer.StringScriptEscaper(&someScriptedString)
