@@ -53,7 +53,6 @@ func recursiveStructEscape(t reflect.Value, replacer *strings.Replacer){
 
 	for i := 0; i < fieldsLen; i++ {
 
-		fmt.Println(t.Field(i).Type().String())
 		if isStructType(t.Field(i).Type().String()){
 			if isPointerType(t.Field(i).Type().String()){
 				recursiveStructEscape(t.Field(i).Elem(), replacer)
