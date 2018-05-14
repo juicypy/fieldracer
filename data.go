@@ -3,7 +3,6 @@ package fieldracer
 import (
 	"reflect"
 	"strings"
-	"fmt"
 )
 
 var escaper = strings.NewReplacer(
