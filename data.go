@@ -3,6 +3,7 @@ package fieldracer
 import (
 	"reflect"
 	"strings"
+	"fmt"
 )
 
 var escaper = strings.NewReplacer(
@@ -52,12 +53,13 @@ func recursiveStructEscape(t reflect.Value, replacer *strings.Replacer){
 
 	for i := 0; i < fieldsLen; i++ {
 
+		fmt.Println(t.Field(i).Type().String())
 		if isStructType(t.Field(i).Type().String()){
-			recursiveStructEscape(t.Field(i), replacer)
-		}
-
-		if isPointerType(t.Field(i).Type().String()){
-			recursiveStructEscape(t.Field(i).Elem(), replacer)
+			if isPointerType(t.Field(i).Type().String()){
+				recursiveStructEscape(t.Field(i).Elem(), replacer)
+			} else {
+				recursiveStructEscape(t.Field(i), replacer)
+			}
 		}
 
 		if t.Field(i).Type().String() == "string" {
@@ -75,7 +77,7 @@ func mapEscape(mapPtr *map[string]interface{}, replacer *strings.Replacer){
 }
 
 func isStructType(typeName string)bool{
-	var stdTypes = []string{"map", "int", "float", "map", "string", "bool", "*"}
+	var stdTypes = []string{"map", "int", "float", "string", "bool", "[]"}
 
 	for _, stdTypeIterator := range stdTypes {
 		if strings.Contains(typeName, stdTypeIterator){
